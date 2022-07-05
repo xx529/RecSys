@@ -1,6 +1,7 @@
 version: '2.6'
 
 services:
+
   web:
     build:
       context: ./app
@@ -11,5 +12,27 @@ services:
       - "8501:8501"
     volumes:
       - "/home/RecSys/app:/app"
+    restart: always
     working_dir: /app
     command: streamlit run start.py
+    depends_on:
+      - db
+
+  db:
+    image: "postgres:15beta1-bullseye"
+    restart: always
+    environment:
+      - POSTGRES_USER=hang
+      - POSTGRES_PASSWORD=12345
+    container_name: RecSys-db
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    container_name: RecSys-dbadminer
+    depends_on:
+      - db
