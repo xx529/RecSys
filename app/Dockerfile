@@ -1,8 +1,8 @@
 FROM python:3.8.13-slim-bullseye
 
 RUN mkdir dockerfile
-COPY ./requirements.txt /dockerfile/
-COPY ./Dockerfile /dockerfile/
+COPY requirements.txt /dockerfile/
+COPY Dockerfile /dockerfile/
 
 # apt 更新
 RUN apt update -y && apt-get update -y && apt -y upgrade

@@ -1,0 +1,15 @@
+version: '2.6'
+
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: "streamlit-base:1.0"
+    container_name: RecSys-web
+    ports:
+      - "8501:8501"
+    volumes:
+      - "/home/RecSys/app:/app"
+    working_dir: /app
+    command: streamlit run start.py
