@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     image: "rec_sys-web:1.0"
     container_name: RecSys-web
+    env_file:
+      - envfile.env
     ports:
       - "8501:8501"
     volumes:
@@ -15,7 +17,8 @@ services:
     restart: always
     working_dir: /web
     command: streamlit run start.py
-    depends_on: db
+    depends_on:
+      - db
 
   alg:
     build:
@@ -23,14 +26,17 @@ services:
       dockerfile: Dockerfile
     image: "rec_sys-alg:1.0"
     container_name: RecSys-alg
+    env_file:
+      - envfile.env
     ports:
       - "1729:5000"
     volumes:
       - "/home/RecSys/app/alg:/alg"
-    restart: always
+#    restart: always
     working_dir: /alg
     command: echo "alg is ready"
-    depends_on: db
+    depends_on:
+      - db
 
   ctl:
     build:
@@ -38,30 +44,23 @@ services:
       dockerfile: Dockerfile
     image: "rec_sys-ctl:1.0"
     container_name: RecSys-ctl
+    env_file:
+      - envfile.env
     ports:
       - "5000:5000"
     volumes:
       - "/home/RecSys/app/ctl:/ctl"
-    restart: always
+#    restart: always
     working_dir: /ctl
     command: echo "ctl is ready"
-    depends_on: db
+    depends_on:
+      - db
 
   db:
     image: "postgres:15beta1-bullseye"
     restart: always
-    environment:
-      - POSTGRES_USER=hang
-      - POSTGRES_PASSWORD=12345
+    env_file:
+      - envfile.env
     container_name: RecSys-db
     ports:
       - "5432:5432"
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    container_name: RecSys-dbadminer
-    depends_on:
-      - db
