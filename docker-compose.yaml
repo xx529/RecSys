@@ -13,10 +13,8 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - "/home/RecSys/app/web:/web"
+      - "/home/RecSys/app/web:/RecSys_web"
     restart: always
-    working_dir: /web
-    command: streamlit run start.py
     depends_on:
       - db
 
@@ -31,9 +29,8 @@ services:
     ports:
       - "1729:5000"
     volumes:
-      - "/home/RecSys/app/alg:/alg"
+      - "/home/RecSys/app/alg:/RecSys_alg"
 #    restart: always
-    working_dir: /alg
     command: echo "alg is ready"
     depends_on:
       - db
@@ -49,10 +46,8 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "/home/RecSys/app/ctl:/ctl"
-#    restart: always
-    working_dir: /ctl
-    command: echo "ctl is ready"
+      - "/home/RecSys/app/ctl:/RecSys_ctl"
+    restart: always
     depends_on:
       - db
 

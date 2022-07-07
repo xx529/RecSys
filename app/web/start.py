@@ -1,5 +1,5 @@
 import streamlit as st
-import os
+import request as r
 
 if __name__ == '__main__':
 
@@ -8,8 +8,9 @@ if __name__ == '__main__':
     st.markdown('## 二级标题')
     st.markdown('### 三级标题')
 
-    st.write(os.getenv('POSTGRES_USER'))
-    st.write(os.getenv('POSTGRES_PASSWORD'))
-    st.write(os.getenv('PROJECT_DBNAME'))
-    st.write(os.getenv('PG_HOST'))
-    st.write(os.getenv('PG_PORT'))
+    st.write(r.get_index())
+
+    st.markdown('***')
+    st.caption('Create by Hang')
+    st.caption('GitHub: https://github.com/xx529/RecSys')
+
