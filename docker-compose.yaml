@@ -1,4 +1,4 @@
-version: '2.6'
+version: '3.1'
 
 services:
 
@@ -52,10 +52,15 @@ services:
       - db
 
   db:
-    image: "postgres:15beta1-bullseye"
+    image: "postgres:11-bullseye"
     restart: always
-    env_file:
-      - envfile.env
+    environment:
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_USER: hang
+      POSTGRES_DB: recsys
+      TZ: Asia/Shanghai
     container_name: RecSys-db
     ports:
       - "5432:5432"
+#    volumes:
+#      - ./data:/var/lib/postgresql/data
