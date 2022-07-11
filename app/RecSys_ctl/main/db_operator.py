@@ -5,6 +5,12 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
+CREATE_TABLE_SQL = {
+    'user_info': f"CREATE TABLE public.user_info (usr varchar NULL, pwd varchar NULL);",
+    'user_rating': f"CREATE TABLE public.user_rating (usr varchar NULL, item varchar NULL, rating integer NULL);",
+    'item_info': f"CREATE TABLE public.item_info (item varchar NULL, descr varchar NULL);"
+}
+
 
 def dbconnect(fun):
     def inner(*args, **kwargs):
@@ -20,7 +26,7 @@ def dbconnect(fun):
 
 
 @dbconnect
-def check_exist_table(table, conn):
+def is_exist_table(table, conn):
     df = pd.read_sql(f"select count(*) from pg_class where relname='{table}'", conn)
     if df['count'][0] == 0:
         return False
@@ -29,20 +35,15 @@ def check_exist_table(table, conn):
 
 
 @dbconnect
-def create_user_info(conn):
-    if check_exist_table('user_info'):
-        return '用户表已经存在'
+def create_table(table, conn):
+    if is_exist_table(table):
+        return f'table named {table} already exist'
     else:
         try:
             cursor = conn.cursor()
-            sql = f"CREATE TABLE public.user_info (usr varchar NULL, pwd varchar NULL);"
-            cursor.execute(sql)
+            cursor.execute(CREATE_TABLE_SQL[table])
             conn.commit()
-            return '用户表创建成功'
+            return f'success to create table {table}'
         except Exception:
-            return '用户表创建失败'
+            return f'fail to create table {table}'
 
-
-@dbconnect
-def test(conn):
-    return pd.read_sql('select * from public.user_info', conn).to_dict()

@@ -1,5 +1,10 @@
 from flask import Flask
 from main import appfunc
+import sys
+import os
+
+
+sys.path.append(os.path.abspath(__file__))
 
 service = Flask(__name__)
 

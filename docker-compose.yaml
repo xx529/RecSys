@@ -4,7 +4,7 @@ services:
 
   web:
     build:
-      context: ./app/web
+      context: app/RecSys_web
       dockerfile: Dockerfile
     image: "rec_sys-web:1.0"
     container_name: RecSys-web
@@ -13,14 +13,14 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - "/home/RecSys/app/web:/RecSys_web"
+      - "/home/RecSys/app/RecSys_web:/RecSys_web"
     restart: always
     depends_on:
       - db
 
   alg:
     build:
-      context: ./app/alg
+      context: app/RecSys_alg
       dockerfile: Dockerfile
     image: "rec_sys-alg:1.0"
     container_name: RecSys-alg
@@ -29,15 +29,15 @@ services:
     ports:
       - "1729:5000"
     volumes:
-      - "/home/RecSys/app/alg:/RecSys_alg"
+      - "/home/RecSys/app/RecSys_alg:/RecSys_alg"
 #    restart: always
-    command: echo "alg is ready"
+    command: echo "RecSys_alg is ready"
     depends_on:
       - db
 
   ctl:
     build:
-      context: ./app/ctl
+      context: app/RecSys_ctl
       dockerfile: Dockerfile
     image: "rec_sys-ctl:1.0"
     container_name: RecSys-ctl
@@ -46,7 +46,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "/home/RecSys/app/ctl:/RecSys_ctl"
+      - "/home/RecSys/app/RecSys_ctl:/RecSys_ctl"
     restart: always
     depends_on:
       - db
