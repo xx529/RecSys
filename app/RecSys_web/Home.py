@@ -5,14 +5,14 @@ from main import doc as doc
 
 if __name__ == '__main__':
 
-    st.set_page_config(page_title='Home')
+    st.set_page_config(page_title='Home', layout="wide")
 
     st.markdown('# 推荐管理系统')
     st.markdown('***')
 
     if st.button('初始化系统'):
         result = r.init_db()
-        for i in result['state']:
-            st.write(i)
+        for idx, context in enumerate(result['state']):
+            st.write(f'{idx + 1}. {context}')
 
     doc.author_msg()

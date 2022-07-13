@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.4'
 
 services:
 
@@ -6,6 +6,7 @@ services:
     build:
       context: app/RecSys_web
       dockerfile: Dockerfile
+      network: host
     image: "rec_sys-web:1.0"
     container_name: RecSys-web
     env_file:
@@ -22,6 +23,7 @@ services:
     build:
       context: app/RecSys_alg
       dockerfile: Dockerfile
+      network: host
     image: "rec_sys-alg:1.0"
     container_name: RecSys-alg
     env_file:
@@ -39,6 +41,7 @@ services:
     build:
       context: app/RecSys_ctl
       dockerfile: Dockerfile
+      network: host
     image: "rec_sys-ctl:1.0"
     container_name: RecSys-ctl
     env_file:

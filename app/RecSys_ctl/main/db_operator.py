@@ -6,9 +6,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 CREATE_TABLE_SQL = {
-    'user_info': f"CREATE TABLE public.user_info (usr varchar NULL, pwd varchar NULL);",
-    'user_rating': f"CREATE TABLE public.user_rating (usr varchar NULL, item varchar NULL, rating integer NULL);",
-    'item_info': f"CREATE TABLE public.item_info (item varchar NULL, descr varchar NULL);"
+    'user_info': 'CREATE TABLE public.user_info (account integer NULL, uname varchar NULL, pwd varchar NULL);',
+    'item_info': 'CREATE TABLE public.item_info (iid integer NULL, item varchar NULL, descr varchar NULL);',
+    'user_rating': 'CREATE TABLE public.user_rating (account varchar NULL, item varchar NULL, rating integer NULL);',
+    'hot_list': 'CREATE TABLE public.hot_list (iid integer NULL, item varchar NULL);',
+    'rec_list': 'CREATE TABLE public.rec_list (account integer NULL, iid integer NULL)'
 }
 
 
@@ -46,4 +48,3 @@ def create_table(table, conn):
             return f'success to create table {table}'
         except Exception:
             return f'fail to create table {table}'
-
