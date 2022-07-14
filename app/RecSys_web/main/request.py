@@ -14,3 +14,38 @@ def content(fun):
 def init_db():
     return requests.get(f"{CTL_HOST_PORT}/init_db")
 
+
+@content
+def add_task():
+    pass
+
+
+@content
+def get_hot_list():
+    pass
+
+
+@content
+def get_guess_favor(account):
+    pass
+
+
+@content
+def get_interest(account):
+    pass
+
+
+@content
+def get_user_info(account):
+    pass
+
+
+@content
+def get_task_info():
+    pass
+
+
+@content
+def get_log():
+    pass
+

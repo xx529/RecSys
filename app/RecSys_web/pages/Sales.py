@@ -3,7 +3,11 @@ from main import doc as doc
 
 st.set_page_config(page_title='Recommend', layout="wide")
 
-st.markdown('# 推荐配置页面')
-st.write('***')
+doc.h0('业务人员页面')
 
-doc.author_msg()
+_bool = st.button('提交任务')
+st.write(_bool)
+
+doc.line()
+
+doc.author()

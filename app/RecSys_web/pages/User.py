@@ -3,19 +3,26 @@ from main import doc as doc
 
 st.set_page_config(page_title='User', layout="wide")
 
-st.markdown('# 用户页面')
-st.markdown('***')
+doc.h0('用户页面')
 
-st.markdown('### 用户登陆')
-account = st.text_input('输入账号')
-name = st.text_input('输入名称')
-pwd = st.text_input('输入密码')
-_bool = st.button('确认')
+doc.h1('用户登陆')
+doc.login(role='user')
+doc.line()
 
-st.markdown('***')
-st.markdown('### 推荐结果')
+doc.h1('历史记录')
+doc.text('您最近的浏览记录')
+doc.line()
 
-if _bool:
-    st.write(f'{account}-{name}-{pwd} 暂无记录')
+doc.h1('热门推荐')
+doc.text('最近比较多人喜欢和点击的')
+doc.line()
 
-doc.author_msg()
+doc.h1('猜你喜欢')
+doc.text('你喜欢的商品与这些类似')
+doc.line()
+
+doc.h1('兴趣圈子')
+doc.text('与你有共同喜好的人也喜欢这些')
+doc.line()
+
+doc.author()
