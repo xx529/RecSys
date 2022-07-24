@@ -6,11 +6,12 @@ import warnings
 warnings.filterwarnings('ignore')
 
 CREATE_TABLE_SQL = {
-    'user_info': 'CREATE TABLE public.user_info (account integer NULL, uname varchar NULL, pwd varchar NULL);',
-    'item_info': 'CREATE TABLE public.item_info (iid integer NULL, item varchar NULL, descr varchar NULL);',
-    'user_rating': 'CREATE TABLE public.user_rating (account varchar NULL, item varchar NULL, rating integer NULL);',
-    'hot_list': 'CREATE TABLE public.hot_list (iid integer NULL, item varchar NULL);',
-    'rec_list': 'CREATE TABLE public.rec_list (account integer NULL, iid integer NULL)'
+    'user_info': 'CREATE TABLE public.user_info (uname varchar NULL, pwd varchar NULL);',
+    'item_info': 'CREATE TABLE public.item_info (item varchar NULL, descr varchar NULL);',
+    'user_rating': 'CREATE TABLE public.user_rating'
+                   ' (uname varchar NULL, item varchar NULL, rating integer NULL);',
+    'hot_list': 'CREATE TABLE public.hot_list (item varchar NULL);',
+    'rec_list': 'CREATE TABLE public.rec_list (uname varchar NULL, item varchar NULL)'
 }
 
 
@@ -48,3 +49,17 @@ def create_table(table, conn):
             return f'success to create table {table}'
         except Exception:
             return f'fail to create table {table}'
+
+
+@dbconnect
+def get_user_info(uname, pwd, conn):
+    df_result = pd.read_sql(f"select * from user_info where uname='{uname}' and pwd='{pwd}'", conn)
+    return df_result.to_dict()
+
+
+@dbconnect
+def get_user_history(uname, conn):
+    df_result = pd.read_sql(f"select * from user_rating where uname='{uname}'", conn)
+    return df_result.to_dict()
+
+

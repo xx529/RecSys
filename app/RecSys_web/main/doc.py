@@ -1,24 +1,27 @@
+import pandas as pd
 import streamlit as st
 import datetime
 
 
-def h0(string):
-    st.header(string)
+def line():
     st.markdown('***')
 
 
-def h1(string, with_line=False):
+def h0(string):
+    st.header(string)
+    line()
+
+
+def h1(string):
     st.markdown(f'#### {string}')
-    if with_line:
-        st.markdown('***')
+
+
+def h2(string):
+    st.markdown(f'##### {string}')
 
 
 def text(string):
     st.caption(string)
-
-
-def line():
-    st.markdown('***')
 
 
 def login(role=None):
@@ -35,7 +38,21 @@ def login(role=None):
     return account, name, pwd
 
 
+def table(data, names=None, cols=None):
+    df = pd.DataFrame(data)
+    if names:
+        df.rename(columns=names, inplace=True)
+    if cols:
+        df = df[cols]
+    st.table(df)
+
+
+def input_button(string):
+    return st.text_input(string)
+
+
 def author():
     st.caption('Create by Hang')
     st.caption('GitHub: https://github.com/xx529/RecSys')
     st.caption(str(datetime.datetime.now()).split('.')[0])
+    line()

@@ -1,5 +1,7 @@
 from flask import Flask
+from flask import request
 from main import appfunc
+from main import db_operator
 import sys
 import os
 
@@ -22,6 +24,18 @@ def index_api():
 @service.route('/init_db')
 def init_db():
     return appfunc.init_db_all()
+
+
+@service.route('/get_user_info')
+def get_user_info_api():
+    args = request.args
+    return db_operator.get_user_info(**args)
+
+
+@service.route('/get_user_history')
+def get_user_history_api():
+    args = request.args
+    return db_operator.get_user_history(**args)
 
 
 if __name__ == '__main__':

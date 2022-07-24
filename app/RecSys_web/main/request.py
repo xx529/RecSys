@@ -1,6 +1,8 @@
 import requests
 import os
 
+import streamlit as st
+
 CTL_HOST_PORT = f"http://{os.getenv('CTL_HOST')}:{os.getenv('CTL_PORT')}"
 
 
@@ -26,7 +28,7 @@ def get_hot_list():
 
 
 @content
-def get_guess_favor(account):
+def get_guess_favor(account, uname, pwd):
     pass
 
 
@@ -36,8 +38,13 @@ def get_interest(account):
 
 
 @content
-def get_user_info(account):
-    pass
+def get_user_info(uname, pwd):
+    return requests.get(f"{CTL_HOST_PORT}/get_user_info?uname={uname}&pwd={pwd}")
+
+
+@content
+def get_user_history(uname):
+    return requests.get(f"{CTL_HOST_PORT}/get_user_history?uname={uname}")
 
 
 @content
